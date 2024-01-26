@@ -61,7 +61,7 @@ jobs:
       group: prod-deploy
       cancel-in-progress: true
     environment: 'prod'
-    needs: [build-and-publish, deploy-dev]
+    needs: [build-and-publish]
     steps:
 
       # Download published artifact
@@ -74,3 +74,24 @@ jobs:
       # Deploy to web app
       - name: Deploy to Azure WebApp
         run: echo "Artifact has been downloaded and is ready for deployment."
+
+  deploy-prod2:
+    runs-on: 'ubuntu-latest'
+    concurrency: 
+      group: prod-deploy2
+      cancel-in-progress: true
+    environment: 'prod'
+    needs: [build-and-publish]
+    steps:
+
+      # Download published artifact
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: published-app
+          path: './published-app'
+
+      # Deploy to web app
+      - name: Deploy to Azure WebApp
+        run: echo "Artifact has been downloaded and is ready for deployment."
+        
