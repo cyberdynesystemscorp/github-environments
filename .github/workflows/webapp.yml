@@ -57,6 +57,9 @@ jobs:
 
   deploy-prod:
     runs-on: 'ubuntu-latest'
+    concurrency: 
+      group: prod-deploy
+      cancel-in-progress: true
     environment: 'prod'
     needs: [build-and-publish, deploy-dev]
     steps:
