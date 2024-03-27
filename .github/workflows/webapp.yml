@@ -44,7 +44,7 @@ jobs:
       group: admin-deploy
       cancel-in-progress: true
     environment: 'admin'
-    needs: build-and-publish
+    needs: build
     steps:
 
       # Download published artifact
@@ -64,7 +64,7 @@ jobs:
       group: frontend-deploy
       cancel-in-progress: true
     environment: 'frontend'
-    needs: [build-and-publish]
+    needs: [build]
     steps:
 
       # Download published artifact
@@ -84,7 +84,7 @@ jobs:
       group: backend-deploy
       cancel-in-progress: true
     environment: 'backend'
-    needs: [build-and-publish]
+    needs: [build]
     steps:
 
       # Download published artifact
